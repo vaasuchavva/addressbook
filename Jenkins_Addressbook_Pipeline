@@ -10,10 +10,10 @@ pipeline {
      jdk 'java'
  }
 stages {
-    stage ('checkout code from SCM'){
+    stage ('Checkout code from SCM'){
      steps{   
 
-         git branch: 'master', url: 'https://github.com/spring-projects/spring-petclinic.git'
+         git branch: 'master', url: 'https://github.com/vaasuchavva/addressbook.git/'
 
       }
     }
@@ -43,7 +43,7 @@ stages {
         }
 
     }
-    stage ('packaging '){
+    stage ('Packaging '){
         steps{
             sh """
             mvn package
