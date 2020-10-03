@@ -52,12 +52,19 @@ stages {
 
     }
     
-    stage ('Upload artifactory'){
+    stage ('Preupload'){
         steps{
             sh  """
             cp /var/lib/jenkins/workspace/demo/target/addressbook-2.0.war .
             zip addressbook_demo.zip addressbook-2.0.war
-            nexusArtifactUploader( \
+            """
+        }
+    }
+    
+    stage ('Nexus Upload'){
+        steps{
+	script {
+              nexusArtifactUploader( \
                  nexusVersion: 'nexus3', \
                  protocol: 'http', \
                  nexusUrl: 'localhost:8081', \
@@ -72,10 +79,9 @@ stages {
                          file: 'addressbook_demo.zip' \
                          ] \
                  ] \
-            )
-            """
+            );
         }
     }
-
+  }
 }
 }
