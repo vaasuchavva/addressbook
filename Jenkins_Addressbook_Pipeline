@@ -51,6 +51,15 @@ stages {
         }
 
     }
+    
+    stage ('Upload artifactory'){
+        steps{
+            sh  """
+            cp /var/lib/jenkins/workspace/demo/target/addressbook-2.0.war .
+            zip addressbook_demo.zip addressbook-2.0.war
+            """
+        }
+    }
 
 }
 }
