@@ -58,11 +58,21 @@ stages {
             cp /var/lib/jenkins/workspace/demo/target/addressbook-2.0.war .
             zip addressbook_demo.zip addressbook-2.0.war
             
-            nexusArtifactUploader artifacts: [[artifactId: 'addressbook', classifier: '', file: 'addressbook_demo.zip', type: 'zip']], credentialsId: 'nexus3_access', groupId: 'addressbook', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'devops_demo_artifactory', version: '1.0'
-
-
-
-
+            nexusArtifactUploader(
+                 artifacts: [
+                         [artifactId: 'addressbook',
+                         classifier: '',
+                         file: 'addressbook_demo.zip',
+                         type: 'zip']
+                 ],
+                 credentialsId: 'nexus3_access',
+                 groupId: 'addressbook',
+                 nexusUrl: 'localhost:8081',
+                 nexusVersion: 'nexus3',
+                 protocol: 'http',
+                 repository: 'devops_demo_artifactory',
+                 version: '1.0'
+            )
             """
         }
     }
