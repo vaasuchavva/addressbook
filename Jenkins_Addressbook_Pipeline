@@ -11,7 +11,7 @@ pipeline {
  }
 
 environment {
-    registry = vaasuchavva/devops_project
+    registry = "vaasuchavva/devops_project"
     registrycredential = 'docker_hub_access'
     dockerImage = ''
 }
