@@ -95,14 +95,6 @@ stages {
   stage('Build docker Image') {
      agent any
      steps{
-	/*
-   	sh """
-	docker build --nocache -t vaasuchavva/devops_project:addressbook-2.0 .
-	docker push vaasuchavva/devops_project:addressbook-2.0  
-	docker run -d -p 8082:8080 --name addressbook vaasuchavva/devops_project:addressbook-2.0
-        """
-	*/
-
 	script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         } 
