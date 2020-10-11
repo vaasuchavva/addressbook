@@ -2,11 +2,8 @@ pipeline {
  agent {
      node {
          label 'master'
+	 dockerfile true
      }
- }
- 
- agent {
-     dockerfile true
  }
  
  tools {
