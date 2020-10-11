@@ -3,8 +3,12 @@ pipeline {
      node {
          label 'master'
      }
+ }
+ 
+ agent {
      dockerfile true
  }
+ 
  tools {
 
      maven 'maven3.6'
