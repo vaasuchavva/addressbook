@@ -9,6 +9,13 @@ pipeline {
      maven 'maven3.6'
      jdk 'java'
  }
+
+environment {
+    registry = vaasuchavva/devops_project
+    registrycredential = 'docker_hub_access'
+    dockerImage = ''
+}
+
 stages {
     stage ('Checkout code from SCM'){
      steps{   
@@ -86,12 +93,35 @@ stages {
 
   stage('Build docker Image') {
      steps{
-	sh """
-	docker build --nocache -t vaasuchavva/devops_project . 
-	"""
-     } 
+	/*
+   	sh """
+	docker build --nocache -t vaasuchavva/devops_project:addressbook-2.0 .
+	docker push vaasuchavva/devops_project:addressbook-2.0  
+	docker run -d -p 8082:8080 --name addressbook vaasuchavva/devops_project:addressbook-2.0
+        """
+	*/
+
+	script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        } 
+    } 
+  }
+  
+  stage('Push Deployable Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
   }
 
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
 
 }
 }
