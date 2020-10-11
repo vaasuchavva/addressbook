@@ -9,7 +9,6 @@ pipeline {
  tools {
      maven 'maven3.6'
      jdk 'java'
-     docker 'docker'
  }
 
 environment {
@@ -94,7 +93,7 @@ stages {
   }
 
   stage('Build docker Image') {
-     agent { dockerfile true }
+     agent any
      steps{
 	/*
    	sh """
