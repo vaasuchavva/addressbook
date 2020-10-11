@@ -83,5 +83,15 @@ stages {
         }
     }
   }
+
+  stage('Build docker Image') {
+     steps{
+	sh """
+	docker build --nocache -t vaasuchavva/devops_project . 
+	"""
+     } 
+  }
+
+
 }
 }
