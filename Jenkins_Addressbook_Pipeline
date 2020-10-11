@@ -1,7 +1,10 @@
 pipeline {
  agent {
-	 dockerfile true
- }
+    node
+	{
+		label 'master'
+    } 
+}
  
  tools {
 
@@ -91,6 +94,7 @@ stages {
   }
 
   stage('Build docker Image') {
+     agent { dockerfile true }
      steps{
 	/*
    	sh """
